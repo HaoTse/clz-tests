@@ -32,3 +32,17 @@ int byte_shift_clz(uint32_t x) {
     n = n - (x >> 31);
     return n;
 }
+
+int recursive_clz(uint32_t x, int offset)
+{
+	//when input = 0
+	if(x == 0)
+		return 32;
+
+	if(offset == 0)
+		return 0;
+
+	uint16_t upper = (x >> offset);
+	uint16_t lower = (x & (0xFFFF >> (16 - offset)));
+	return upper ? recursive_clz(upper, offset >> 1) : offset + recursive_clz(lower, offset >> 1);
+}

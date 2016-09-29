@@ -30,6 +30,11 @@ int main(int argc, char const *argv[])
         strcpy(str, "byte_shift_clz");
 #endif
 
+#if defined(RECURSIVE)
+        clz = recursive_clz(i, 16);
+        strcpy(str, "recursive_clz");
+#endif
+
     	//error message
     	if(correct != clz) {
     		printf("%s(%d) is error\n", str, i);
